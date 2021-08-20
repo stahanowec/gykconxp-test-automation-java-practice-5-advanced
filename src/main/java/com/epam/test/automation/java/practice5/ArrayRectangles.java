@@ -1,52 +1,67 @@
 package com.epam.test.automation.java.practice5;
 
-/**
- * <summary>
- * Implement class according to description of task.
- * </summary>
- */
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.IntStream;
+
 public class ArrayRectangles {
-    //TODO: Delete line below and write your own solution;
-    //TODO: implement constructors according to description of task
 
-    /**
-     * <summary>
-     * Implement code according to description of task.
-     * </summary>
-     */
+    private List<Rectangle> rectangleArray;
+
+    public ArrayRectangles(int n) {
+        this.rectangleArray = new ArrayList<>(n);
+    }
+
     public boolean addRectangle(Rectangle rectangle) {
-        //TODO: Delete line below and write your own solution;
-        throw new UnsupportedOperationException();
+        return rectangleArray.add(rectangle);
     }
 
-    /**
-     * <summary>
-     * Implement code according to description of task.
-     * </summary>
-     */
     public int numberMaxArea() {
-        //TODO: Delete line below and write your own solution;
-        throw new UnsupportedOperationException();
+
+        return IntStream.range(0, rectangleArray.size())
+                .mapToObj(i -> {
+                            var value = rectangleArray.get(i).area();
+                            return new Pair(i, value);
+                        }
+                ).max(Comparator.comparing(Pair::getValue))
+                .map(Pair::getNum)
+                .stream().findFirst().orElseThrow(IllegalArgumentException::new);
+
     }
 
-    /**
-     * <summary>
-     * Implement code according to description of task.
-     * </summary>
-     */
     public int numberMinPerimeter() {
-        //TODO: Delete line below and write your own solution;
-        throw new UnsupportedOperationException();
+        return IntStream.range(0, rectangleArray.size())
+                .mapToObj(i -> {
+                            var value = rectangleArray.get(i).perimeter();
+                            return new Pair(i, value);
+                        }
+                ).min(Comparator.comparing(Pair::getValue))
+                .map(Pair::getNum)
+                .stream().findFirst().orElseThrow(IllegalArgumentException::new);
     }
 
-    /**
-     * <summary>
-     * Implement code according to description of task.
-     * </summary>
-     */
     public int numberSquares() {
-        //TODO: Delete line below and write your own solution;
-        throw new UnsupportedOperationException();
+        return (int) rectangleArray.stream().filter(Rectangle::isSquare).count();
+    }
+
+
+    public static class Pair {
+        private int num;
+        private double value;
+
+        public Pair(int num, double value) {
+            this.num = num;
+            this.value = value;
+        }
+
+        public int getNum() {
+            return num;
+        }
+
+        public double getValue() {
+            return value;
+        }
     }
 
 }
