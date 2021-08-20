@@ -11,7 +11,7 @@ public class ArrayRectanglesTest {
 
     @BeforeMethod
     public void init(){
-        this.rectangles = new ArrayRectangles(5);
+        this.rectangles = new ArrayRectangles(new Rectangle[5]);
         this.rectangles.addRectangle(getDefaultReactangle());
     }
 

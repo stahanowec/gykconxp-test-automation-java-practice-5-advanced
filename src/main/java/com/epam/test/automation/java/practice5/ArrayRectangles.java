@@ -9,8 +9,8 @@ public class ArrayRectangles {
 
     private List<Rectangle> rectangleArray;
 
-    public ArrayRectangles(int n) {
-        this.rectangleArray = new ArrayList<>(n);
+    public ArrayRectangles(Rectangle[] n) {
+        this.rectangleArray = new ArrayList<>(n.length);
     }
 
     public boolean addRectangle(Rectangle rectangle) {
