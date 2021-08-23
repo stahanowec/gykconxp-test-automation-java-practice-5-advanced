@@ -1,27 +1,41 @@
 package com.epam.test.automation.java.practice5;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class ArrayRectangles {
 
-    private List<Rectangle> rectangleArray;
+    private Rectangle[] rectangleArray;
 
-    public ArrayRectangles(Rectangle[] n) {
-        this.rectangleArray = new ArrayList<>(n.length);
+    public ArrayRectangles(int n) {
+        this.rectangleArray = new Rectangle[n];
     }
 
+    public ArrayRectangles(Rectangle[] n) {
+        this.rectangleArray = n;
+    }
+
+
     public boolean addRectangle(Rectangle rectangle) {
-        return rectangleArray.add(rectangle);
+        var pairStream = IntStream.range(0, rectangleArray.length)
+                .filter(element -> rectangleArray[element] == null)
+                .findFirst();
+
+        if (pairStream.isPresent()) {
+            this.rectangleArray[pairStream.getAsInt()] = rectangle;
+            return true;
+        }
+        return false;
     }
 
     public int numberMaxArea() {
 
-        return IntStream.range(0, rectangleArray.size())
+        return IntStream.range(0, rectangleArray.length)
+                .filter(element -> rectangleArray[element] != null)
                 .mapToObj(i -> {
-                            var value = rectangleArray.get(i).area();
+                            var value = rectangleArray[i].area();
                             return new Pair(i, value);
                         }
                 ).max(Comparator.comparing(Pair::getValue))
@@ -31,9 +45,10 @@ public class ArrayRectangles {
     }
 
     public int numberMinPerimeter() {
-        return IntStream.range(0, rectangleArray.size())
+        return IntStream.range(0, rectangleArray.length)
+                .filter(element -> rectangleArray[element] != null)
                 .mapToObj(i -> {
-                            var value = rectangleArray.get(i).perimeter();
+                            var value = rectangleArray[i].perimeter();
                             return new Pair(i, value);
                         }
                 ).min(Comparator.comparing(Pair::getValue))
@@ -42,7 +57,10 @@ public class ArrayRectangles {
     }
 
     public int numberSquares() {
-        return (int) rectangleArray.stream().filter(Rectangle::isSquare).count();
+        return (int) Arrays.stream(rectangleArray)
+                .filter(Objects::nonNull)
+                .filter(Rectangle::isSquare)
+                .count();
     }
 
 

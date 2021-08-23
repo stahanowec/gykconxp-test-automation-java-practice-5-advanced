@@ -3,6 +3,7 @@ package com.epam.test.automation.java.practice5;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertThrows;
 import static org.testng.AssertJUnit.assertEquals;
 
 public class ArrayRectanglesTest {
@@ -10,7 +11,7 @@ public class ArrayRectanglesTest {
     private ArrayRectangles rectangles;
 
     @BeforeMethod
-    public void init(){
+    public void init() {
         this.rectangles = new ArrayRectangles(new Rectangle[5]);
         this.rectangles.addRectangle(getDefaultReactangle());
     }
@@ -54,9 +55,17 @@ public class ArrayRectanglesTest {
         assertEquals(1, result);
     }
 
+    @Test
+    public void ifArrayRectangleWithEmptyConstructor() {
+        //given
+        var arrayRectangles = new ArrayRectangles(5);
+        //when then
+        assertThrows(IllegalArgumentException.class, () -> arrayRectangles.numberMaxArea());
 
-    private Rectangle getRectangle(double a, double b){
-        return new Rectangle(a,b);
+    }
+
+    private Rectangle getRectangle(double a, double b) {
+        return new Rectangle(a, b);
     }
 
     private Rectangle getDefaultReactangle() {

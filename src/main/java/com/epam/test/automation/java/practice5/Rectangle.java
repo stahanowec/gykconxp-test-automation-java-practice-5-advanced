@@ -17,7 +17,7 @@ public class Rectangle {
 
     public Rectangle() {
         this.a = 4;
-        this.b = -3;
+        this.b = 3;
     }
 
 
