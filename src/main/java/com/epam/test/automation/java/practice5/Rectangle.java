@@ -2,53 +2,46 @@ package com.epam.test.automation.java.practice5;
 
 public class Rectangle {
 
-    private double a;
-    private double b;
+    private double sideA;
+    private double sideB;
 
     public Rectangle(double a, double b) {
-        this.a = a;
-        this.b = b;
+        if (a <= 0 || b <= 0) throw new IllegalArgumentException();
+        this.sideA = a;
+        this.sideB = b;
     }
 
     public Rectangle(double a) {
-        this.a = a;
-        this.b = 5;
+        this(a, 5);
     }
 
     public Rectangle() {
-        this.a = 4;
-        this.b = 3;
+        this(4, 3);
     }
 
-
     public double getSideA() {
-        return Math.abs(a);
+        return sideA;
     }
 
     public double getSideB() {
-        return Math.abs(b);
+        return sideB;
     }
-
 
     public double area() {
-        return Math.abs(a * b);
+        return getSideA() * getSideB();
     }
-
 
     public double perimeter() {
-        return Math.abs((2 * a) + Math.abs(2 * b));
+        return (2 * getSideA()) + (2 * getSideB());
     }
-
 
     public boolean isSquare() {
-        return Math.abs(a) == Math.abs(b);
+        return getSideA() == getSideB();
     }
-
 
     public void replaceSides() {
-        var temp = Math.abs(this.a);
-        this.a = Math.abs(this.b);
-        this.b = temp;
+        var temp = sideA;
+        sideA = sideB;
+        sideB = temp;
     }
-
 }
