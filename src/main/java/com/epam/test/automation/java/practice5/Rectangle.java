@@ -44,4 +44,5 @@ public class Rectangle {
         sideA = sideB;
         sideB = temp;
     }
+
 }

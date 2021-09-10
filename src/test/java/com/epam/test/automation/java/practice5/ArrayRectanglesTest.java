@@ -92,4 +92,5 @@ public class ArrayRectanglesTest {
     private Rectangle getDefaultReactangle() {
         return new Rectangle();
     }
+
 }

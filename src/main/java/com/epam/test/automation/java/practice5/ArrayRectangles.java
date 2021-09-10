@@ -59,7 +59,6 @@ public class ArrayRectangles {
                 .min(Comparator.comparing(Pair::getValue))
                 .map(Pair::getNum)
                 .stream().findFirst().orElseThrow(IllegalArgumentException::new);
-
     }
 
     public int numberSquares() {
